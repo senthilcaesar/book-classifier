@@ -556,13 +556,121 @@ def render_sidebar():
 
 def render_upload_step_tab():
     """Render the upload step in tab format"""
-    st.markdown("## 📁 Upload your reading list")
+    # Add input fields for book name and author name
+    st.markdown("### 📚 Add a Book Name or Upload it as a CSV File or Attach Sample Data")
+    book_title = st.text_input("Book Title", help="Enter the title of the book")
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        author_name = st.text_input("Author Name", help="Enter the author's name")
+    with col2:
+        if st.button("Find Author"):
+            if book_title:
+                try:
+                    # Use AI model to find the author name based on the book title
+                    author_name = generate_book_summary(book_title, "", openai.OpenAI(api_key=st.session_state.api_key))
+                    st.session_state.author_name = author_name
+                    st.success(f"✅ Author found: {author_name}")
+                except Exception as e:
+                    st.error(f"❌ Error finding author: {e}")
+            else:
+                st.error("❌ Please enter the book title to find the author.")
+    
+    # Button to add the book to the table
+    if st.button("Add Book"):
+        if book_title and author_name:
+            # Create a DataFrame for the new book
+            new_book_df = pd.DataFrame([{
+                'Title': book_title,
+                'Author': author_name,
+                'Category': '',
+                'Summary': ''
+            }])
+            
+            # Add the new book to the session state
+            if 'df' in st.session_state and st.session_state.df is not None:
+                st.session_state.df = pd.concat([st.session_state.df, new_book_df], ignore_index=True)
+            else:
+                st.session_state.df = new_book_df
+            
+            st.success(f"✅ Book '{book_title}' by {author_name} added successfully!")
+            
+            # Display the updated data
+            st.markdown("---")
+            with st.expander("📊 Data Preview", expanded=True):
+                preview_cols = ['Title', 'Author', 'Category', 'Summary']
+                st.dataframe(st.session_state.df[preview_cols].head(10))
+        else:
+            st.error("❌ Please enter both the book title and author name.")
+    
+    # Existing upload section
+    
+    st.markdown("**Note:** The CSV file should have the columns 'Title', 'Author', 'Category', and 'Summary'.")
     
     uploaded_file = st.file_uploader(
         "Choose a CSV file",
         type=['csv'],
         help="Upload a CSV file with columns: Title, Author, Category (Summary column is optional)"
     )
+    
+    # Move the button to a new row
+    if st.button("Attach sample data"):
+            try:
+                sample_df = pd.read_csv("sample.csv")
+                
+                # Validate required columns
+                required_columns = ['Title', 'Author', 'Category']
+                if not all(col in sample_df.columns for col in required_columns):
+                    st.error(f"❌ Missing required columns. Found: {list(sample_df.columns)}")
+                    return
+                
+                st.session_state.df = sample_df
+                st.success(f"✅ Sample data loaded successfully! {len(sample_df)} books found.")
+                
+                # Statistics
+                col1, col2, col3 = st.columns(3)
+                
+                missing_mask = (sample_df['Category'].isna() |
+                               (sample_df['Category'].astype(str).str.strip() == '') |
+                               (sample_df['Category'].astype(str).str.lower() == 'none'))
+                books_to_classify = missing_mask.sum()
+                categorized_books = len(sample_df) - books_to_classify
+                
+                with col1:
+                    st.markdown(f"""
+                    <div class="metric-card">
+                        <h4>📚 Total Books</h4>
+                        <h2>{len(sample_df)}</h2>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with col2:
+                    st.markdown(f"""
+                    <div class="metric-card">
+                        <h4>✅ Already Categorized</h4>
+                        <h2>{categorized_books}</h2>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with col3:
+                    st.markdown(f"""
+                    <div class="metric-card">
+                        <h4>❓ Need Classification</h4>
+                        <h2>{books_to_classify}</h2>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                # Data preview
+                st.markdown("---")
+                with st.expander("📊 Data Preview", expanded=False):
+                    preview_cols = ['Title', 'Author', 'Category']
+                    if 'Summary' in sample_df.columns:
+                        preview_cols.append('Summary')
+                    st.dataframe(sample_df[preview_cols].head(10))
+                
+                st.success("✅ Data uploaded successfully! Please click on the 'Classification' tab above to continue.")
+                    
+            except Exception as e:
+                st.error(f"❌ Error loading sample data: {e}")
     
     if uploaded_file is not None:
         try:
@@ -665,19 +773,19 @@ def render_classification_step_tab():
                 </div>
                 """, unsafe_allow_html=True)
         
-        with col2:
-            if st.button(button_text, type="primary", use_container_width=True, disabled=not st.session_state.api_key):
-                if not st.session_state.api_key:
-                    st.error("❌ Please enter your OpenAI API key in the sidebar.")
-                else:
-                    classify_books_with_live_table(classification_mask)
-            
-            # Skip classification button
-            st.markdown("---")
-            if st.button("Skip Classification", type="secondary", use_container_width=True):
-                # Set classified_df to current df and proceed
-                st.session_state.classified_df = df
-                st.info("✅ Classification skipped! Please click on the 'Summarization' tab above to continue.")
+        # Move the buttons to a new row
+        if st.button(button_text, type="primary", use_container_width=True, disabled=not st.session_state.api_key):
+            if not st.session_state.api_key:
+                st.error("❌ Please enter your OpenAI API key in the sidebar.")
+            else:
+                classify_books_with_live_table(classification_mask)
+                
+        # Skip classification button
+        st.markdown("---")
+        if st.button("Skip Classification", type="secondary", use_container_width=True):
+            # Set classified_df to current df and proceed
+            st.session_state.classified_df = df
+            st.info("✅ Classification skipped! Please click on the 'Summarization' tab above to continue.")
 
 def render_summarization_step_tab():
     """Render the summarization step in tab format"""
@@ -724,19 +832,19 @@ def render_summarization_step_tab():
             </div>
             """, unsafe_allow_html=True)
         
-        with col2:
-            if st.button("Generate Summaries", type="primary", use_container_width=True, disabled=not st.session_state.api_key):
-                if not st.session_state.api_key:
-                    st.error("❌ Please enter your OpenAI API key in the sidebar.")
-                else:
-                    generate_summaries(missing_summary_mask)
-            
-            # Skip summarization button
-            st.markdown("---")
-            if st.button("Skip Summaries", type="secondary", use_container_width=True):
-                # Set summarized_df to current df and proceed
-                st.session_state.summarized_df = st.session_state.classified_df
-                st.info("✅ Summaries skipped! Please click on the 'Analysis' tab above to continue.")
+        # Move the buttons to a new row
+        if st.button("Generate Summaries", type="primary", use_container_width=True, disabled=not st.session_state.api_key):
+            if not st.session_state.api_key:
+                st.error("❌ Please enter your OpenAI API key in the sidebar.")
+            else:
+                generate_summaries(missing_summary_mask)
+                
+        # Skip summarization button
+        st.markdown("---")
+        if st.button("Skip Summaries", type="secondary", use_container_width=True):
+            # Set summarized_df to current df and proceed
+            st.session_state.summarized_df = st.session_state.classified_df
+            st.info("✅ Summaries skipped! Please click on the 'Analysis' tab above to continue.")
 
 def render_analysis_step_tab():
     """Render the final analysis step in tab format"""
@@ -1066,15 +1174,7 @@ def main():
     
     with tab4:
         render_analysis_step_tab()
-    
-    # Reset button in sidebar
-    with st.sidebar:
-        st.markdown("---")
-        if st.button("🔄 Reset All Data", help="Clear all data and start over"):
-            for key in ['df', 'classified_df', 'summarized_df']:
-                if key in st.session_state:
-                    del st.session_state[key]
-            st.rerun()
+
 
 if __name__ == "__main__":
     # Initialize session state
