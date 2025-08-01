@@ -19,341 +19,368 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Google AI Studio inspired clean design
+# Custom CSS for clean, professional styling inspired by diabetes nutrition app
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap');
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Clean Google AI Studio styling */
+/* Global Styles */
 .stApp {
-    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #2c3e50;
 }
 
+/* Hide Streamlit branding */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* Main container */
 .main .block-container {
-    padding: 2rem 3rem;
+    padding: 1rem 2rem;
     max-width: 1200px;
-    background-color: #ffffff;
-    margin: 0 auto;
-}
-
-/* Clean header like Google AI Studio */
-.main-header {
-    font-family: 'Google Sans', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 400;
-    color: #202124;
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 1rem;
-}
-
-/* Clean metric cards */
-.metric-card {
-    background: #ffffff;
-    padding: 1.5rem;
+    background: white;
     border-radius: 12px;
-    border: 1px solid #e8eaed;
-    margin-bottom: 1rem;
-    transition: box-shadow 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin: 1rem auto;
 }
 
-.metric-card:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.metric-card h4 {
-    color: #202124;
+/* Header styling */
+.main-header {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #4A90E2;
+    text-align: left;
     margin-bottom: 0.5rem;
-    font-weight: 500;
-    font-family: 'Google Sans', sans-serif;
+    letter-spacing: -0.02em;
 }
 
-.metric-card p {
-    color: #5f6368;
-    margin: 0.25rem 0;
-    font-family: 'Google Sans', sans-serif;
-}
-
-/* Clean status boxes */
-.success-box {
-    background-color: #e8f5e8;
-    color: #137333;
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid #34a853;
-    margin: 1rem 0;
-    font-family: 'Google Sans', sans-serif;
-}
-
-.warning-box {
-    background-color: #fef7e0;
-    color: #b06000;
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid #fbbc04;
-    margin: 1rem 0;
-    font-family: 'Google Sans', sans-serif;
-}
-
-.info-box {
-    background-color: #e8f0fe;
-    color: #1967d2;
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid #4285f4;
-    margin: 1rem 0;
-    font-family: 'Google Sans', sans-serif;
-}
-
-/* Clean section headers */
-.section-header {
-    font-family: 'Google Sans', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #202124;
-    margin: 2rem 0 1rem 0;
-    padding-bottom: 0.5rem;
-}
-
-/* Clean sidebar like Google AI Studio */
-.css-1d391kg {
-    background-color: #f8f9fa;
-    border-right: 1px solid #e8eaed;
-}
-
-/* Google-style buttons */
-.stButton > button {
-    background-color: #87CEEB;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 0.75rem 1.5rem;
-    font-weight: 500;
-    font-family: 'Google Sans', sans-serif;
-    transition: background-color 0.2s ease;
-    box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
-}
-
-.stButton > button:hover {
-    background-color: #87CEEB;
-    box-shadow: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
-}
-
-/* Clean file uploader */
-.stFileUploader {
-    border: 2px dashed #dadce0;
-    border-radius: 8px;
-    padding: 2rem;
-    text-align: center;
-    background-color: #fafafa;
-    transition: border-color 0.2s ease;
-}
-
-.stFileUploader:hover {
-    border-color: #1a73e8;
-    background-color: #f8f9fa;
-}
-
-/* Clean progress bar */
-.stProgress > div > div > div {
-    background-color: #1a73e8;
-    border-radius: 4px;
-}
-
-/* Clean inputs */
-.stSelectbox > div > div,
-.stTextInput > div > div > input {
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    background-color: #ffffff;
-    font-family: 'Google Sans', sans-serif;
-}
-
-.stSelectbox > div > div:focus-within,
-.stTextInput > div > div > input:focus {
-    border-color: #1a73e8;
-    box-shadow: 0 0 0 1px #1a73e8;
-}
-
-/* Clean dataframe */
-.stDataFrame {
-    border: 1px solid #e8eaed;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Clean tabs */
-.stTabs {
-    background-color: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e8eaed;
-    padding: 1rem;
+.main-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    font-weight: 400;
     margin-bottom: 2rem;
 }
 
-/* Clean typography */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Google Sans', sans-serif;
-    color: #202124;
+/* Sidebar styling */
+.css-1d391kg {
+    background-color: #f8f9fa;
+    padding: 1rem;
 }
 
-p, div, span {
-    font-family: 'Google Sans', sans-serif;
-    color: #5f6368;
+.sidebar .sidebar-content {
+    background: transparent;
 }
 
-/* Clean cost cards */
-.cost-card {
-    background: #ffffff;
-    border: 1px solid #e8eaed;
-    border-radius: 8px;
+/* Navigation cards in sidebar */
+.nav-card {
+    background: white;
+    border-radius: 12px;
     padding: 1rem;
     margin: 0.5rem 0;
-    transition: box-shadow 0.2s ease;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
-.cost-card:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.nav-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
 }
 
-.cost-card-header {
+.nav-card.active {
+    background: #4A90E2;
+    color: white;
+    border-color: #4A90E2;
+}
+
+.nav-card h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    font-weight: 400;
-    color: #202124;
-    font-family: 'Google Sans', sans-serif;
+    gap: 0.5rem;
 }
 
-.cost-icon {
-    margin-right: 0.5rem;
-    font-size: 1.1rem;
-}
-
-/* Feature badges */
-.feature-badge {
-    display: inline-flex;
-    align-items: center;
-    background: #f8f9fa;
-    border: 1px solid #e8eaed;
-    border-radius: 20px;
-    padding: 0.75rem 1rem;
-    margin: 0.25rem;
-    color: #5f6368;
-    font-weight: 400;
-    font-family: 'Google Sans', sans-serif;
+/* Modern cards */
+.modern-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
     transition: all 0.2s ease;
 }
 
-.feature-badge:hover {
-    background: #e8f0fe;
-    border-color: #4285f4;
-    color: #1967d2;
+.modern-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.feature-icon {
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
+/* Metric cards */
+.metric-card {
+    background: #4A90E2;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+    border: none;
+    transition: all 0.2s ease;
 }
 
-/* Clean scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f3f4;
+.metric-card h4 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #dadce0;
-    border-radius: 4px;
+.metric-card h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #bdc1c6;
+/* Status boxes */
+.success-box {
+    background: #28a745;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+    margin: 1rem 0;
 }
 
-/* Center content like Google AI Studio */
-.centered-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 0;
+.warning-box {
+    background: #ffc107;
+    color: #212529;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+    margin: 1rem 0;
 }
 
-/* Large upload area */
-.upload-area {
-    max-width: 600px;
-    margin: 2rem auto;
+.info-box {
+    background: #17a2b8;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(23, 162, 184, 0.2);
+    margin: 1rem 0;
+}
+
+.error-box {
+    background: #dc3545;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+    margin: 1rem 0;
+}
+
+/* Progress indicators */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
+}
+
+.step-item {
+    text-align: center;
+    flex: 1;
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.step-item.completed {
+    background: #28a745;
+    color: white;
+    font-weight: 500;
+}
+
+.step-item.active {
+    background: #4A90E2;
+    color: white;
+    font-weight: 500;
+}
+
+.step-item.inactive {
+    color: #6c757d;
+    background: #f8f9fa;
+}
+
+/* Buttons */
+.stButton > button {
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+.stButton > button:hover {
+    background: #357abd;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+.stButton > button:focus {
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
+}
+
+/* Tabs styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 4px;
+    background: white;
+    border-radius: 12px;
+    padding: 0.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent;
+    border-radius: 8px;
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    color: #6c757d;
+}
+
+.stTabs [aria-selected="true"] {
+    background: #4A90E2;
+    color: white !important;
+}
+
+/* File uploader */
+.stFileUploader {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 2px dashed #4A90E2;
+    transition: all 0.2s ease;
     text-align: center;
 }
 
-/* Processing section */
-.processing-section {
-    max-width: 700px;
-    margin: 2rem auto;
-    text-align: center;
+.stFileUploader:hover {
+    border-color: #357abd;
+    background: rgba(74, 144, 226, 0.02);
+}
+
+/* Dataframe styling */
+.stDataFrame {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
+}
+
+/* Selectbox and input styling */
+.stSelectbox > div > div {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s ease;
+}
+
+.stSelectbox > div > div:focus-within {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.stTextInput > div > div {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s ease;
+}
+
+.stTextInput > div > div:focus-within {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Progress bar */
+.stProgress > div > div {
+    background: #4A90E2;
+    border-radius: 8px;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 1px solid #e9ecef;
+}
+
+/* Sidebar text styling */
+.sidebar .markdown-text-container {
+    color: #2c3e50;
+}
+
+/* Custom section headers */
+.section-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+/* Processing table styling */
+.processing-table {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 1rem 0;
+    border: 1px solid #e9ecef;
+}
+
+/* Alert styling */
+.stAlert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Metric styling */
+.stMetric {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
 }
 </style>
 """, unsafe_allow_html=True)
-
-def generate_summary_batch(books: List[Dict[str, str]], client, progress_bar, status_text) -> List[str]:
-    """Generate summaries for a batch of books using OpenAI API"""
-    
-    book_list = []
-    for i, book in enumerate(books):
-        book_info = f"{i+1}. \"{book['Title']}\" by {book['Author']}"
-        book_list.append(book_info)
-    
-    book_text = "\n".join(book_list)
-    
-    prompt = f"""Please provide a brief, concise summary (2-3 sentences) for each of the following books based on their title and author. Write about what the book is about, its main themes, concepts, or plot - do NOT start with the book title or author name.
-
-BOOKS TO SUMMARIZE:
-{book_text}
-
-INSTRUCTIONS:
-- Provide exactly 2-3 sentences per book
-- Write about what the book covers, its main themes, concepts, or plot
-- Do NOT start the summary with the book title or author name
-- Be informative and concise about the book's content
-- If you're not familiar with a specific book, provide a general summary based on the title and author's typical work
-- Respond with ONLY a numbered list matching the input
-
-FORMAT YOUR RESPONSE EXACTLY LIKE THIS:
-1. This book explores [main theme/concept/plot]. It discusses [key points]. [Additional relevant information].
-2. This work examines [main theme/concept/plot]. It covers [key points]. [Additional relevant information].
-3. This book focuses on [main theme/concept/plot]. It presents [key points]. [Additional relevant information].
-(etc.)"""
-
-    try:
-        status_text.text("📝 Generating summaries...")
-        
-        response = client.chat.completions.create(
-            model=st.session_state.selected_model,
-            messages=[
-                {"role": "system", "content": "You are a knowledgeable book summarizer. Provide concise, informative summaries based on book titles and authors."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=2000,
-            temperature=0.3
-        )
-        
-        content = response.choices[0].message.content
-        
-        # Parse the response to extract summaries
-        lines = content.strip().split('\n')
-        summaries = []
-        
-        for line in lines:
-            if line.strip() and any(char.isdigit() for char in line[:3]):
-                summary = line.split('.', 1)[1].strip() if '.' in line else line.strip()
-                summaries.append(summary)
-        
-        return summaries
-        
-    except Exception as e:
-        st.error(f"Error generating summaries: {e}")
-        return ["Summary not available."] * len(books)
 
 def classify_book_batch(books: List[Dict[str, str]], client, progress_bar, status_text) -> List[str]:
     """Classify a batch of books using OpenAI API with progress updates"""
@@ -361,7 +388,7 @@ def classify_book_batch(books: List[Dict[str, str]], client, progress_bar, statu
     book_list = []
     for i, book in enumerate(books):
         book_info = f"{i+1}. \"{book['Title']}\" by {book['Author']}"
-        if book.get('Summary') and str(book['Summary']).strip() and str(book['Summary']).lower() != 'null':
+        if book.get('Summary') and str(book['Summary']).strip() and str(book['Summary']).lower() not in ['null', 'none', '']:
             book_info += f" - {book['Summary']}"
         book_list.append(book_info)
     
@@ -445,413 +472,365 @@ FORMAT YOUR RESPONSE EXACTLY LIKE THIS:
         st.error(f"Error in API call: {e}")
         return ["Other"] * len(books)
 
-def main():
-    # Google AI Studio style header
-    st.markdown('<h1 class="main-header">Book Classification & Summary Tool</h1>', unsafe_allow_html=True)
+def generate_book_summary(title: str, author: str, client) -> str:
+    """Generate a brief summary for a book using OpenAI API"""
     
-    # Centered configuration section like Google AI Studio
-    st.markdown('<div class="centered-content">', unsafe_allow_html=True)
-    
-    # Configuration in horizontal layout
-    col1, col2, col3 = st.columns([1, 1, 1])
-    
-    env_api_key = os.getenv("OPENAI_API_KEY")
-    api_key = env_api_key
+    prompt = f"""Please provide a brief 1-2 sentence summary of the book "{title}" by {author}.
 
-    
-    with col1:
+Focus on:
+- What the book is about (main topic/theme)
+- The type/genre of book it is
+- Key subject matter
+
+Keep it concise and factual. If you're not familiar with this specific book, provide a general description based on the title and author's typical work.
+
+Format: Just the summary, no additional text."""
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4", 
+            messages=[
+                {"role": "system", "content": "You are a book expert who provides concise, accurate book summaries."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=100,
+            temperature=0.3
+        )
+        
+        summary = response.choices[0].message.content.strip()
+        return summary
+        
+    except Exception as e:
+        st.error(f"Error generating summary for '{title}': {e}")
+        return ""
+
+def render_sidebar():
+    """Render the sidebar configuration"""
+    with st.sidebar:
+        st.header("⚙️ Configuration")
+        
+        # API Key handling
+        env_api_key = os.getenv("OPENAI_API_KEY")
+        
+        if env_api_key:
+            st.success("✅ API Key loaded from .env file")
+            api_key = env_api_key
+            masked_key = f"{env_api_key[:8]}...{env_api_key[-4:]}" if len(env_api_key) > 12 else "***"
+            #st.info(f"🔑 Using key: {masked_key}")
+        else:
+            st.warning("⚠️ No API key found in .env file")
+            api_key = st.text_input(
+                "OpenAI API Key",
+                type="password",
+                help="Get your API key from https://platform.openai.com/api-keys or add OPENAI_API_KEY to your .env file"
+            )
+        
+        st.session_state.api_key = api_key
+        
+        st.markdown("---")
+        
         # Model selection
+        st.markdown("### Model Settings")
         model_options = {
             "GPT-4": "gpt-4",
             "GPT-3.5 Turbo": "gpt-3.5-turbo"
         }
         selected_model_name = st.selectbox(
-            "Model",
+            "Classification Model",
             list(model_options.keys()),
             help="GPT-4 is more accurate but more expensive"
         )
         st.session_state.selected_model = model_options[selected_model_name]
-    
+        
+        # Batch size
+        batch_size = st.slider(
+            "Batch Size",
+            min_value=1,
+            max_value=15,
+            value=8,
+            help="Number of books to classify in each API call"
+        )
+        st.session_state.batch_size = batch_size
+        
+        
 
-    batch_size = 8
+def render_upload_step_tab():
+    """Render the upload step in tab format"""
+    st.markdown("## 📁 Upload your reading list")
     
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Main upload area - centered like Google AI Studio
-    st.markdown('<div class="upload-area">', unsafe_allow_html=True)
-    
-    # Large, prominent upload section
     uploaded_file = st.file_uploader(
-        "Drop your CSV file here or click to browse",
+        "Choose a CSV file",
         type=['csv'],
-        help="Upload CSV with columns: Title, Author, Category, Summary (optional)",
-        key="main_uploader"
+        help="Upload a CSV file with columns: Title, Author, Category (Summary column is optional)"
     )
     
-    if uploaded_file is None:
-        # Show requirements when no file is uploaded
-        st.markdown("""
-        <div class="info-box">
-            <h4>📋 Requirements</h4>
-            <p><strong>Required columns:</strong> Title, Author, Category</p>
-            <p><strong>Optional:</strong> Summary (will be AI-generated if missing)</p>
-            <p><strong>Format:</strong> CSV file</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Feature showcase
-        st.markdown("""
-        <div style="margin: 2rem 0;">
-            <div class="feature-badge">
-                <span class="feature-icon">🤖</span>
-                AI Classification
-            </div>
-            <div class="feature-badge">
-                <span class="feature-icon">📖</span>
-                Smart Summaries
-            </div>
-            <div class="feature-badge">
-                <span class="feature-icon">⚡</span>
-                Batch Processing
-            </div>
-            <div class="feature-badge">
-                <span class="feature-icon">📊</span>
-                Analytics
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Process uploaded file
     if uploaded_file is not None:
         try:
             df = pd.read_csv(uploaded_file)
-            st.session_state.df = df
             
             # Validate required columns
             required_columns = ['Title', 'Author', 'Category']
             if not all(col in df.columns for col in required_columns):
                 st.error(f"❌ Missing required columns. Found: {list(df.columns)}")
-                st.stop()
+                return
             
-            # Ensure Summary column exists
-            if 'Summary' not in df.columns:
-                df['Summary'] = ''
-                st.session_state.df = df
-                st.info("📝 Added Summary column to dataset")
+            st.session_state.df = df
+            st.success(f"✅ File loaded successfully! {len(df)} books found.")
             
-            st.success(f"✅ Successfully loaded {len(df)} books!")
+            # Statistics
+            col1, col2, col3 = st.columns(3)
             
-            # Analytics Dashboard - Clean Google style
-            st.markdown('<h2 class="section-header">Dataset Analytics</h2>', unsafe_allow_html=True)
-            
-            # Metrics in a clean row
-            col1, col2, col3, col4 = st.columns(4)
-            
-            total_books = len(df)
             missing_mask = (df['Category'].isna() |
-                          (df['Category'].astype(str).str.strip() == '') |
-                          (df['Category'].astype(str).str.lower() == 'none'))
+                           (df['Category'].astype(str).str.strip() == '') |
+                           (df['Category'].astype(str).str.lower() == 'none'))
             books_to_classify = missing_mask.sum()
-            categorized_books = total_books - books_to_classify
-            
-            summary_mask = (df['Summary'].isna() |
-                           (df['Summary'].astype(str).str.strip() == '') |
-                           (df['Summary'].astype(str).str.lower() == 'null'))
-            books_needing_summaries = summary_mask.sum()
+            categorized_books = len(df) - books_to_classify
             
             with col1:
                 st.markdown(f"""
-                <div class="metric-card" style="text-align: center;">
-                    <h4>📚 {total_books}</h4>
-                    <p>Total Books</p>
+                <div class="metric-card">
+                    <h4>📚 Total Books</h4>
+                    <h2>{len(df)}</h2>
                 </div>
                 """, unsafe_allow_html=True)
             
             with col2:
                 st.markdown(f"""
-                <div class="metric-card" style="text-align: center;">
-                    <h4>✅ {categorized_books}</h4>
-                    <p>Categorized</p>
+                <div class="metric-card">
+                    <h4>✅ Already Categorized</h4>
+                    <h2>{categorized_books}</h2>
                 </div>
                 """, unsafe_allow_html=True)
             
             with col3:
                 st.markdown(f"""
-                <div class="metric-card" style="text-align: center;">
-                    <h4>🎯 {books_to_classify}</h4>
-                    <p>Need Classification</p>
+                <div class="metric-card">
+                    <h4>❓ Need Classification</h4>
+                    <h2>{books_to_classify}</h2>
                 </div>
                 """, unsafe_allow_html=True)
             
-            with col4:
-                st.markdown(f"""
-                <div class="metric-card" style="text-align: center;">
-                    <h4>📝 {books_needing_summaries}</h4>
-                    <p>Need Summaries</p>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            # Processing Section - Centered like Google AI Studio
-            if books_to_classify > 0:
-                st.markdown('<div class="processing-section">', unsafe_allow_html=True)
-                st.markdown('<h2 class="section-header">AI Processing</h2>', unsafe_allow_html=True)
-                
-                # Cost calculation
-                classification_cost = books_to_classify * (0.035 if selected_model_name == 'GPT-4' else 0.005)
-                summary_cost = books_needing_summaries * (0.025 if selected_model_name == 'GPT-4' else 0.004)
-                total_cost = classification_cost + summary_cost
-                
-                # Processing info
-                st.markdown(f"""
-                <div class="warning-box">
-                    <p>• Books to classify: <strong>{books_to_classify}</strong></p>
-                    <p>• Summaries to generate: <strong>{books_needing_summaries}</strong></p>
-                    <p>• Estimated cost: <strong>${total_cost:.2f}</strong></p>
-                </div>
-                """, unsafe_allow_html=True)
-                
-                # Large, centered action button
-                if st.button("Start Processing",
-                            type="primary",
-                            disabled=not api_key,
-                            use_container_width=True):
-                    if not api_key:
-                        st.error("Please configure your OpenAI API key above.")
-                    else:
-                        classify_books(api_key, batch_size, missing_mask)
-                
-                st.markdown('</div>', unsafe_allow_html=True)
-            else:
-                st.markdown("""
-                <div class="success-box" style="max-width: 600px; margin: 2rem auto;">
-                    <h4>🎉 Processing Complete!</h4>
-                    <p>All books are already categorized. Ready for download!</p>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            # Data preview in expandable section
+            # Data preview
+            st.markdown("---")
             with st.expander("📊 Data Preview", expanded=False):
                 preview_cols = ['Title', 'Author', 'Category']
                 if 'Summary' in df.columns:
                     preview_cols.append('Summary')
-                st.dataframe(df[preview_cols].head(10), use_container_width=True)
+                st.dataframe(df[preview_cols].head(10))
+            
+            st.success("✅ Data uploaded successfully! Please click on the 'Classification' tab above to continue.")
                 
         except Exception as e:
             st.error(f"❌ Error loading file: {e}")
-            st.stop()
+
+def render_classification_step_tab():
+    """Render the classification step in tab format"""
+    if 'df' not in st.session_state or st.session_state.df is None:
+        st.warning("⚠️ Please upload data first in the Upload tab.")
+        return
     
-    # Results section
+    df = st.session_state.df
+    missing_mask = (df['Category'].isna() |
+                   (df['Category'].astype(str).str.strip() == '') |
+                   (df['Category'].astype(str).str.lower() == 'none'))
+    books_to_classify = missing_mask.sum()
+        
     if 'classified_df' in st.session_state and st.session_state.classified_df is not None:
-        display_results()
+        
+        st.success("✅ Classification complete! Please click on the 'Summarization' tab above to continue.")
+    else:
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            if books_to_classify == 0:
+                st.markdown("""
+                <div class="info-box">
+                    <h4>ℹ️ All books already have categories</h4>
+                    <p>You can still run classification to improve or verify the categories.</p>
+                </div>
+                """, unsafe_allow_html=True)
+                # Create mask for all books when none need classification
+                classification_mask = pd.Series([True] * len(df), index=df.index)
+                estimated_cost = len(df) * (0.035 if st.session_state.selected_model == "gpt-4" else 0.005)
+                button_text = "🎯 Classify All Books"
+            else:
+                estimated_cost = books_to_classify * (0.035 if st.session_state.selected_model == "gpt-4" else 0.005)
+                classification_mask = missing_mask
+                button_text = "Start Classification"
+                st.markdown(f"""
+                <div class="warning-box">
+                    <h4>📋 Ready to classify {books_to_classify} books</h4>
+                    <p><strong>Model:</strong> {st.session_state.selected_model}</p>
+                    <p><strong>Batch size:</strong> {st.session_state.batch_size} books per request</p>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        with col2:
+            if st.button(button_text, type="primary", use_container_width=True, disabled=not st.session_state.api_key):
+                if not st.session_state.api_key:
+                    st.error("❌ Please enter your OpenAI API key in the sidebar.")
+                else:
+                    classify_books_with_live_table(classification_mask)
+            
+            # Skip classification button
+            st.markdown("---")
+            if st.button("Skip Classification", type="secondary", use_container_width=True):
+                # Set classified_df to current df and proceed
+                st.session_state.classified_df = df
+                st.info("✅ Classification skipped! Please click on the 'Summarization' tab above to continue.")
 
-def classify_books(api_key: str, batch_size: int, missing_mask):
-    """Main classification function with progress tracking and summary generation"""
-    try:
-        client = openai.OpenAI(api_key=api_key)
-        df = st.session_state.df.copy()
-        
-        books_to_classify = df[missing_mask].copy()
-        total_books = len(books_to_classify)
-        
-        # Progress tracking
-        progress_bar = st.progress(0)
-        status_text = st.empty()
-        results_container = st.empty()
-        
-        # Prepare books for classification
-        books = []
-        books_needing_summaries = []
-        summary_indices = []
-        
-        for idx, (_, row) in enumerate(books_to_classify.iterrows()):
-            book_data = {
-                'Title': str(row['Title']).strip(),
-                'Author': str(row['Author']).strip(),
-                'Summary': str(row['Summary']) if pd.notna(row['Summary']) and str(row['Summary']).strip() and str(row['Summary']).lower() != 'null' else ''
-            }
-            books.append(book_data)
-            
-            # Check if book needs a summary
-            if not book_data['Summary']:
-                books_needing_summaries.append(book_data)
-                summary_indices.append(idx)
-        
-        # Generate summaries for books that need them
-        all_summaries = [''] * len(books)
-        if books_needing_summaries:
-            st.info(f"📝 Generating summaries for {len(books_needing_summaries)} books without summaries...")
-            
-            summary_batches = (len(books_needing_summaries) + batch_size - 1) // batch_size
-            generated_summaries = []
-            
-            for i in range(0, len(books_needing_summaries), batch_size):
-                batch = books_needing_summaries[i:i + batch_size]
-                batch_num = i // batch_size + 1
-                
-                status_text.text(f"📝 Generating summaries - batch {batch_num}/{summary_batches}")
-                
-                summaries = generate_summary_batch(batch, client, progress_bar, status_text)
-                generated_summaries.extend(summaries)
-                
-                # Rate limiting
-                if i + batch_size < len(books_needing_summaries):
-                    time.sleep(2)
-            
-            # Update books with generated summaries
-            for i, summary_idx in enumerate(summary_indices):
-                if i < len(generated_summaries):
-                    books[summary_idx]['Summary'] = generated_summaries[i]
-                    all_summaries[summary_idx] = generated_summaries[i]
-        
-        # Process classification in batches
-        all_categories = []
-        total_batches = (total_books + batch_size - 1) // batch_size
-        
-        for i in range(0, total_books, batch_size):
-            batch = books[i:i + batch_size]
-            batch_num = i // batch_size + 1
-            
-            status_text.text(f"🔄 Classifying batch {batch_num}/{total_batches} ({len(batch)} books)")
-            
-            categories = classify_book_batch(batch, client, progress_bar, status_text)
-            all_categories.extend(categories)
-            
-            # Update progress (50% for summaries, 50% for classification)
-            base_progress = 0.5 if books_needing_summaries else 0
-            classification_progress = (min((i + batch_size) / total_books, 1.0)) * 0.5
-            total_progress = base_progress + classification_progress
-            progress_bar.progress(total_progress)
-            
-            # Show current batch results
-            with results_container.container():
-                st.subheader(f"📝 Batch {batch_num} Results:")
-                batch_results = []
-                for book, category in zip(batch, categories):
-                    batch_results.append({
-                        'Title': book['Title'][:50] + '...' if len(book['Title']) > 50 else book['Title'],
-                        'Author': book['Author'],
-                        'Category': category,
-                        'Summary': book['Summary'][:100] + '...' if len(book['Summary']) > 100 else book['Summary']
-                    })
-                st.dataframe(pd.DataFrame(batch_results), hide_index=True)
-            
-            # Rate limiting
-            if i + batch_size < total_books:
-                time.sleep(2)
-        
-        # Update dataframe with results
-        df.loc[missing_mask, 'Category'] = all_categories[:len(books_to_classify)]
-        
-        # Update summaries for books that didn't have them
-        if books_needing_summaries:
-            summary_mask = df[missing_mask].index
-            for i, summary_idx in enumerate(summary_indices):
-                if i < len(generated_summaries):
-                    original_idx = summary_mask[summary_idx]
-                    df.loc[original_idx, 'Summary'] = generated_summaries[i]
-        
-        st.session_state.classified_df = df
-        
-        progress_bar.progress(1.0)
-        status_text.text("✅ Classification and summary generation completed!")
-        
-        summary_count = len(books_needing_summaries)
-        success_msg = f"🎉 Successfully classified {total_books} books!"
-        if summary_count > 0:
-            success_msg += f" Generated {summary_count} new summaries!"
-        st.success(success_msg)
-        
-    except Exception as e:
-        st.error(f"❌ Classification failed: {e}")
-
-def display_results():
-    """Display classification results and analysis"""
-    st.markdown('<h2 class="section-header">📊 Results & Analysis</h2>', unsafe_allow_html=True)
+def render_summarization_step_tab():
+    """Render the summarization step in tab format"""
+    if 'classified_df' not in st.session_state or st.session_state.classified_df is None:
+        st.warning("⚠️ Please complete classification first in the Classification tab.")
+        return
     
     df = st.session_state.classified_df
     
-    # Safety check to ensure df is valid
-    if df is None or len(df) == 0:
-        st.error("No data available for display.")
-        return
+    # Check for missing summaries
+    if 'Summary' not in df.columns:
+        df['Summary'] = ''
     
-    # Professional completion message
-    st.markdown(f"""
-    <div class="success-box">
-        <h4>Processing Complete!</h4>
-        <p>Successfully processed {len(df)} books with AI-powered classification and summary generation.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    missing_summary_mask = (df['Summary'].isna() |
+                           (df['Summary'].astype(str).str.strip() == '') |
+                           (df['Summary'].astype(str).str.lower() == 'none') |
+                           (df['Summary'].astype(str).str.lower() == 'null'))
     
-    # Tabs for different views
-    tab1, tab2, tab3 = st.tabs(["📈 Overview", "📚 Books by Category", "💾 Download"])
-    
-    with tab1:
-        col1, col2 = st.columns(2)
+    books_needing_summary = missing_summary_mask.sum()
+        
+    if books_needing_summary == 0:
+        st.markdown("""
+        <div class="success-box">
+            <h4>✅ All books already have summaries!</h4>
+            <p>No summary generation needed. Proceed to Analysis tab.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if 'summarized_df' not in st.session_state:
+            st.session_state.summarized_df = df
+        
+        st.success("✅ All books have summaries! Please click on the 'Analysis' tab above to continue.")
+    elif 'summarized_df' in st.session_state and st.session_state.summarized_df is not None:
+
+        
+        st.success("✅ Summary generation complete! Please click on the 'Analysis' tab above to continue.")
+    else:
+        col1, col2 = st.columns([2, 1])
         
         with col1:
-            # Category distribution
-            st.subheader("Category Distribution")
-            # Handle None/NaN values in Category column
-            category_counts = df['Category'].fillna('Uncategorized').value_counts()
+            estimated_cost = books_needing_summary * 0.002
+            st.markdown(f"""
+            <div class="warning-box">
+                <h4>Ready to generate summaries for {books_needing_summary} books</h4>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col2:
+            if st.button("Generate Summaries", type="primary", use_container_width=True, disabled=not st.session_state.api_key):
+                if not st.session_state.api_key:
+                    st.error("❌ Please enter your OpenAI API key in the sidebar.")
+                else:
+                    generate_summaries(missing_summary_mask)
+            
+            # Skip summarization button
+            st.markdown("---")
+            if st.button("Skip Summaries", type="secondary", use_container_width=True):
+                # Set summarized_df to current df and proceed
+                st.session_state.summarized_df = st.session_state.classified_df
+                st.info("✅ Summaries skipped! Please click on the 'Analysis' tab above to continue.")
+
+def render_analysis_step_tab():
+    """Render the final analysis step in tab format"""
+    if 'summarized_df' not in st.session_state or st.session_state.summarized_df is None:
+        st.warning("⚠️ Please complete previous steps first.")
+        return
+    
+    st.markdown("## Results & Analysis")
+    
+    df = st.session_state.summarized_df
+    
+    # Summary statistics
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown(f"""
+        <div class="metric-card">
+            <h4>📚 Total Books Processed</h4>
+            <h2>{len(df)}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        category_count = len(df['Category'].fillna('Uncategorized').unique())
+        st.markdown(f"""
+        <div class="metric-card">
+            <h4>🏷️ Unique Categories</h4>
+            <h2>{category_count}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        summary_count = len(df[df['Summary'].notna() & (df['Summary'].astype(str).str.strip() != '')])
+        st.markdown(f"""
+        <div class="metric-card">
+            <h4>📝 Books with Summaries</h4>
+            <h2>{summary_count}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Tabs for detailed analysis
+    tab1, tab2, tab3 = st.tabs(["📈 Category Analysis", "📚 Book Explorer", "💾 Download Results"])
+    
+    with tab1:
+        st.subheader("Category Distribution")
+        category_counts = df['Category'].fillna('Uncategorized').value_counts()
+        
+        col1, col2 = st.columns([2, 1])
+        with col1:
             st.bar_chart(category_counts)
         
         with col2:
-            # Top categories
-            st.subheader("Top 10 Categories")
-            top_categories = category_counts.head(10)
-            for category, count in top_categories.items():
+            st.markdown("**Top Categories:**")
+            for i, (category, count) in enumerate(category_counts.head(10).items()):
                 percentage = (count / len(df)) * 100
                 st.metric(
-                    label=category,
+                    label=f"{i+1}. {category}",
                     value=f"{count} books",
                     delta=f"{percentage:.1f}%"
                 )
     
     with tab2:
-        # Filter by category
-        st.subheader("Filter Books by Category")
+        st.subheader("Browse Your Books")
         
-        # Get unique categories, handling None/NaN values
-        unique_categories = df['Category'].fillna('Uncategorized').unique()
-        sorted_categories = sorted([cat for cat in unique_categories if pd.notna(cat)])
-        
-        selected_category = st.selectbox(
-            "Select a category:",
-            options=['All'] + sorted_categories
-        )
+        # Category filter
+        categories = ['All'] + sorted(df['Category'].fillna('Uncategorized').unique().tolist())
+        selected_category = st.selectbox("Filter by category:", categories)
         
         if selected_category == 'All':
             filtered_df = df
-        elif selected_category == 'Uncategorized':
-            filtered_df = df[df['Category'].isna() | (df['Category'].str.strip() == '')]
         else:
-            filtered_df = df[df['Category'] == selected_category]
+            if selected_category == 'Uncategorized':
+                filtered_df = df[df['Category'].isna()]
+            else:
+                filtered_df = df[df['Category'] == selected_category]
         
         st.write(f"📖 Showing {len(filtered_df)} books")
         
-        # Display books (excluding Status column completely)
+        # Display books
         available_cols = ['Title', 'Author', 'Category']
         if 'Summary' in filtered_df.columns:
             available_cols.append('Summary')
         
-        # Only use columns that actually exist in the dataframe
         display_cols = [col for col in available_cols if col in filtered_df.columns]
         display_df = filtered_df[display_cols].copy()
         st.dataframe(display_df, hide_index=True, use_container_width=True)
     
     with tab3:
-        # Download options
-        st.subheader("Download Results")
-        
-        st.info("💡 Right-click the download buttons and select 'Save link as...' if direct download doesn't work.")
+        st.subheader("Download Your Results")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            # Download full results
+            # Download complete dataset
             csv_buffer = io.StringIO()
             df.to_csv(csv_buffer, index=False)
             csv_data = csv_buffer.getvalue()
@@ -859,94 +838,257 @@ def display_results():
             st.download_button(
                 label="📥 Download Complete Dataset",
                 data=csv_data,
-                file_name="reading_list_classified.csv",
+                file_name=f"book_analysis_complete_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}.csv",
                 mime="text/csv",
-                help="Download the complete dataset with all classifications",
+                help="Download the complete dataset with classifications and summaries",
                 use_container_width=True
             )
         
         with col2:
-            # Download only newly classified books
-            if ('df' in st.session_state and st.session_state.df is not None and 
-                len(st.session_state.df) > 0):
-                original_df = st.session_state.df
-                missing_mask = (original_df['Category'].isna() | 
-                               (original_df['Category'].astype(str).str.strip() == '') |
-                               (original_df['Category'].astype(str).str.lower() == 'none'))
-                newly_classified = df[missing_mask]
-                
-                if len(newly_classified) > 0:
-                    csv_buffer2 = io.StringIO()
-                    newly_classified.to_csv(csv_buffer2, index=False)
-                    csv_data2 = csv_buffer2.getvalue()
-                    
-                    st.download_button(
-                        label="📥 Download Only New Classifications",
-                        data=csv_data2,
-                        file_name="newly_classified_books.csv",
-                        mime="text/csv",
-                        help="Download only the books that were classified in this session",
-                        use_container_width=True
-                    )
+            # Download summary statistics
+            summary_stats = {
+                'Total Books': len(df),
+                'Categories': len(df['Category'].unique()),
+                'Books with Summaries': len(df[df['Summary'].notna()]),
+                'Most Common Category': df['Category'].mode()[0] if len(df['Category'].mode()) > 0 else 'N/A'
+            }
+            
+            stats_df = pd.DataFrame(list(summary_stats.items()), columns=['Metric', 'Value'])
+            stats_csv = stats_df.to_csv(index=False)
+            
+            st.download_button(
+                label="📊 Download Summary Statistics",
+                data=stats_csv,
+                file_name=f"book_analysis_stats_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv",
+                help="Download summary statistics about your book collection",
+                use_container_width=True
+            )
         
-        # Add summary at the bottom
-        # st.markdown("---")
-        # st.success(f"✅ Classification complete! {len(df)} total books processed.")
+        st.success("✅ Analysis complete! Your book collection has been fully processed and analyzed.")
+        
+        # Navigation options
+        st.markdown("---")
+
+
+def classify_books_with_live_table(missing_mask):
+    """Perform book classification with live updating table"""
+    try:
+        client = openai.OpenAI(api_key=st.session_state.api_key)
+        df = st.session_state.df.copy()
+        
+        books_to_classify = df[missing_mask].copy()
+        total_books = len(books_to_classify)
+        
+        st.markdown("### 🔄 Live AI Classification - Watch the table update in real-time!")
+        
+        # Progress tracking
+        progress_bar = st.progress(0)
+        status_text = st.empty()
+        processing_table = st.empty()
+        
+        # Initialize processing results table with all books as "Pending"
+        processing_results = []
+        books = []
+        
+        for _, row in books_to_classify.iterrows():
+            book_data = {
+                'Title': str(row['Title']).strip(),
+                'Author': str(row['Author']).strip(),
+                'Summary': str(row['Summary']) if pd.notna(row['Summary']) else ''
+            }
+            books.append(book_data)
+            
+            processing_results.append({
+                'Status': '⏳ Pending',
+                'Title': book_data['Title'][:50] + '...' if len(book_data['Title']) > 50 else book_data['Title'],
+                'Author': book_data['Author'][:30] + '...' if len(book_data['Author']) > 30 else book_data['Author'],
+                'Category': '...',
+                'Summary': book_data['Summary'][:80] + '...' if len(book_data['Summary']) > 80 else book_data['Summary'] or 'No summary'
+            })
+        
+        # Display initial table with all pending books
+        with processing_table.container():
+            st.markdown("#### 📊 Live Processing Status")
+            results_df = pd.DataFrame(processing_results)
+            st.dataframe(results_df, hide_index=True, use_container_width=True)
+        
+        # Process in batches with live updates
+        all_categories = []
+        batch_size = st.session_state.batch_size
+        total_batches = (total_books + batch_size - 1) // batch_size
+        processed_count = 0
+        
+        for i in range(0, total_books, batch_size):
+            batch = books[i:i + batch_size]
+            batch_num = i // batch_size + 1
+            
+            status_text.text(f"🎯 Processing batch {batch_num}/{total_batches} ({len(batch)} books)")
+            
+            # Update status to "Processing" for current batch
+            for j, book in enumerate(batch):
+                book_idx = i + j
+                processing_results[book_idx]['Status'] = '🔄 Processing...'
+            
+            # Refresh table to show processing status
+            with processing_table.container():
+                st.markdown(f"#### 📊 Live Processing Status ({processed_count}/{total_books} completed)")
+                results_df = pd.DataFrame(processing_results)
+                st.dataframe(results_df, hide_index=True, use_container_width=True)
+            
+            categories = classify_book_batch(batch, client, progress_bar, status_text)
+            all_categories.extend(categories)
+            
+            # Update each book individually as "Completed"
+            for j, (book, category) in enumerate(zip(batch, categories)):
+                book_idx = i + j
+                processing_results[book_idx]['Status'] = '✅ Completed'
+                processing_results[book_idx]['Category'] = category
+                processed_count += 1
+                
+                # Update progress
+                progress = processed_count / total_books
+                progress_bar.progress(progress)
+                
+                # Refresh table after each book completion
+                with processing_table.container():
+                    st.markdown(f"#### 📊 Live Processing Status ({processed_count}/{total_books} completed)")
+                    results_df = pd.DataFrame(processing_results)
+                    st.dataframe(results_df, hide_index=True, use_container_width=True)
+                
+                # Small delay to show the live update effect
+                time.sleep(0.5)
+            
+            # Rate limiting between batches
+            if i + batch_size < total_books:
+                time.sleep(2)
+        
+        # Update dataframe with results - fix pandas warning
+        categories_series = pd.Series(all_categories[:len(books_to_classify)], dtype='object')
+        df.loc[missing_mask, 'Category'] = categories_series
+        st.session_state.classified_df = df
+        
+        progress_bar.progress(1.0)
+        status_text.text("✅ All books classified successfully!")
+        
+        st.success(f"🎉 Successfully classified {total_books} books with live AI processing!")
+        st.balloons()
+        
+        # Auto-refresh to show updated state
+        time.sleep(2)
+        st.rerun()
+        
+    except Exception as e:
+        st.error(f"❌ Classification failed: {e}")
+
+def generate_summaries(missing_summary_mask):
+    """Generate AI summaries for books"""
+    try:
+        client = openai.OpenAI(api_key=st.session_state.api_key)
+        df = st.session_state.classified_df.copy()
+        
+        books_needing_summary = df[missing_summary_mask].copy()
+        total_books = len(books_needing_summary)
+        
+        st.markdown("### 📝 Summary Generation in Progress")
+        
+        # Progress tracking
+        progress_bar = st.progress(0)
+        status_text = st.empty()
+        results_container = st.empty()
+        
+        updated_summaries = []
+        
+        for i, (idx, row) in enumerate(books_needing_summary.iterrows()):
+            status_text.text(f"📝 Generating summary {i+1}/{total_books}: {row['Title'][:50]}...")
+            
+            summary = generate_book_summary(row['Title'], row['Author'], client)
+            updated_summaries.append((idx, summary))
+            
+            # Update progress
+            progress = (i + 1) / total_books
+            progress_bar.progress(progress)
+            
+            # Show progress in results container
+            with results_container.container():
+                st.markdown(f"**📚 Recently Generated ({i+1}/{total_books}):**")
+                recent_summaries = updated_summaries[-3:]  # Show last 3
+                for _, summary in recent_summaries:
+                    book_row = df.loc[_]
+                    st.write(f"• **{book_row['Title']}** by {book_row['Author']}")
+                    st.write(f"  _{summary}_")
+            
+            # Small delay to avoid rate limits
+            time.sleep(0.5)
+        
+        # Update the dataframe with new summaries
+        for idx, summary in updated_summaries:
+            df.at[idx, 'Summary'] = summary
+        
+        st.session_state.summarized_df = df
+        
+        progress_bar.progress(1.0)
+        status_text.text("✅ Summary generation completed!")
+        
+        st.success(f"📝 Successfully generated summaries for {total_books} books!")
+        st.balloons()
+        
+        # Auto-refresh to show updated state
+        time.sleep(2)
+        st.rerun()
+        
+    except Exception as e:
+        st.error(f"❌ Summary generation failed: {e}")
+
+def main():
+    """Main application function"""
+    # Header with clean, professional styling
+    st.markdown("""
+    <div style="margin-bottom: 2rem;">
+        <h1 class="main-header">Book Classification & Summary Tool</h1>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Sidebar
+    render_sidebar()
+    
+    # Main content with horizontal tabs
+    tab1, tab2, tab3, tab4 = st.tabs(["📁 Upload", "🎯 Classification", "📝 Summarization", "📊 Analytics"])
+    
+    with tab1:
+        render_upload_step_tab()
+    
+    with tab2:
+        render_classification_step_tab()
+    
+    with tab3:
+        render_summarization_step_tab()
+    
+    with tab4:
+        render_analysis_step_tab()
+    
+    # Reset button in sidebar
+    with st.sidebar:
+        st.markdown("---")
+        if st.button("🔄 Reset All Data", help="Clear all data and start over"):
+            for key in ['df', 'classified_df', 'summarized_df']:
+                if key in st.session_state:
+                    del st.session_state[key]
+            st.rerun()
 
 if __name__ == "__main__":
-    # Initialize session state with proper defaults
+    # Initialize session state
     if 'df' not in st.session_state:
         st.session_state.df = None
     if 'classified_df' not in st.session_state:
         st.session_state.classified_df = None
-    
-    # Clear any invalid session state on app restart
-    if st.session_state.classified_df is not None and not hasattr(st.session_state.classified_df, 'columns'):
-        st.session_state.classified_df = None
+    if 'summarized_df' not in st.session_state:
+        st.session_state.summarized_df = None
+    if 'api_key' not in st.session_state:
+        st.session_state.api_key = None
+    if 'selected_model' not in st.session_state:
+        st.session_state.selected_model = "gpt-4"
+    if 'batch_size' not in st.session_state:
+        st.session_state.batch_size = 8
     
     main()
-
-# Instructions for running the app
-# """
-# SETUP INSTRUCTIONS:
-
-# 1. Install required packages:
-#    pip install streamlit openai pandas python-dotenv
-
-# 2. Create a .env file in the same directory:
-#    OPENAI_API_KEY=your-actual-api-key-here
-
-# 3. Save this code as 'book_classifier_app.py'
-
-# 4. Run the Streamlit app:
-#    streamlit run book_classifier_app.py
-
-# 5. Open your browser to the URL shown (usually http://localhost:8501)
-
-# 6. Use the app:
-#    - The app will automatically load your API key from .env
-#    - Upload your CSV file (requires: Title, Author, Category columns)
-#    - Configure settings (model, batch size)
-#    - Click "Start Classification"
-#    - View results and download the classified dataset
-
-# ENVIRONMENT FILE SETUP:
-# Create a file named '.env' in your project directory with:
-# OPENAI_API_KEY=sk-your-actual-openai-api-key-here
-
-# CSV FILE REQUIREMENTS:
-# - Required columns: Title, Author, Category
-# - Optional columns: Summary (helps with classification accuracy)
-# - Status column will be ignored if present
-
-# FEATURES:
-# - Automatic API key loading from .env file
-# - Real-time progress tracking
-# - Batch processing with customizable batch sizes
-# - Cost estimation
-# - Interactive data visualization
-# - Category filtering and analysis
-# - Download options for results
-# - Responsive design with custom styling
-# - Secure API key handling
-# """
