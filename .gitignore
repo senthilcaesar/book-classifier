@@ -148,11 +148,7 @@ ehthumbs.db
 Thumbs.db
 
 # Project specific
-*.csv
-!sample_books.csv
-classified_books.csv
-reading_list_classified.csv
-newly_classified_books.csv
+reading_list.csv
 
 # Temporary files
 *.tmp
