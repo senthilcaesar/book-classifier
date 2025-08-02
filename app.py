@@ -16,7 +16,8 @@ st.set_page_config(
     page_title="Book Classification Tool",
     page_icon="📚",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    theme="light"  # Enforce light mode
 )
 
 # Custom CSS for clean, professional styling inspired by diabetes nutrition app
